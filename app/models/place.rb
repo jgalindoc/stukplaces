@@ -16,7 +16,13 @@ class Place < ActiveRecord::Base
 		self.reviews.sum(:score) / reviews.size
 	rescue ZeroDivisionError
 		0
-
 	end
 
+	def self.search(search)
+		if search
+			where(['name LIKE ? OR address LIKE ?', "#{search}", "#{search}"])
+		else
+			all
+		end 
+	end 
 end
