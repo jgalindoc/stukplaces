@@ -2,37 +2,43 @@
   <div class="col-md-3">
     <h3><%= @place.name %></h3>
     <strong>Address</strong>
-      <p><%= @place.address %></p>
+    <p><%= @place.address %></p>
     <strong>Phone</strong>
-      <p><%= @place.phone%></p>
+    <p><%= @place.phone%></p>
     <strong>Website</strong>
-      <p><%= @place.website %></p>
+    <p><%= @place.website %></p>
     <strong>Description</strong>
-      <p><%= @place.description %></p>
+    <p><%= @place.description %></p>
 
-<div id="map" style="width: 230px; height: 230px;"></div>
+    <div id="map" style="width: 230px; height: 230px;"></div>
 
- </div>
-    <div class="col-md-9">
-      <h3> Review by People </h3>
-    </div>
+  </div>
+  <div class="col-md-9">
+    <% if current_user %>
+    <h3> Review by People </h3>
+    <h5>New Review</h5>
+    <%= render "reviews/form" %>
+    <h5>All Reviews</h5>
+    <%= render @reviews %>
+    <% end %>
+  </div>
 
 </div>
 
 <script type="text/javascript">
 
-var map;
-function initMap() {
-  var mycenter = {lat: <%= @place.latitude %> , lng: <%= @place.longitude%>}
-  map = new google.maps.Map(document.getElementById('map'), {
-    center: mycenter,
-    zoom: 8
-  });
-  var marker = new google.maps.Marker({
-    position: mycenter,
-    map: map
-  });
-}
+  var map;
+  function initMap() {
+    var mycenter = {lat: <%= @place.latitude %> , lng: <%= @place.longitude%>}
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: mycenter,
+      zoom: 8
+    });
+    var marker = new google.maps.Marker({
+      position: mycenter,
+      map: map
+    });
+  }
 
 </script>
 
